@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ListView;
 
 import com.yash.mnotes.dbmanager.Note;
@@ -27,6 +28,7 @@ public class MNotes extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 		selectedItems = new ArrayList();
 		notesManager = NotesManager.getInstance(getApplicationContext());
