@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Add Note</string>
+    <string name="app_name">mNotes</string>
+    <string name="splash">Splash</string>
+</resources>
