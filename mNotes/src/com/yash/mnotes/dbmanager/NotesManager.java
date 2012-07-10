@@ -65,8 +65,10 @@ public class NotesManager implements iNoteManager {
 	}
 
 	public static void closeDB() {
-		INSTANCE.dbOpenHelper.close();
-		INSTANCE = null;
+		if (INSTANCE != null) {
+			INSTANCE.dbOpenHelper.close();
+			INSTANCE = null;
+		}
 	}
 
 	public void initNotesFromDB() {
@@ -75,6 +77,8 @@ public class NotesManager implements iNoteManager {
 
 	private void establishDB() {
 		if (noteDb == null) {
+			noteDb = dbOpenHelper.getWritableDatabase();
+		} else if (!noteDb.isOpen()) {
 			noteDb = dbOpenHelper.getWritableDatabase();
 		}
 	}
@@ -142,6 +146,7 @@ public class NotesManager implements iNoteManager {
 
 	public List<Note> getAllNotesFromDB() {
 		availableNotes = new ArrayList<Note>();
+		establishDB();
 		Cursor resultSet = noteDb.rawQuery("SELECT * FROM "
 				+ NOTES_DB_TABLE_NAME + ";", null);
 

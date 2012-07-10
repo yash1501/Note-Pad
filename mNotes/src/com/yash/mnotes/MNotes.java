@@ -100,6 +100,18 @@ public class MNotes extends Activity {
 	}
 
 	@Override
+	protected void onStop() {
+		super.onStop();
+		NotesManager.closeDB();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		notesManager = NotesManager.getInstance(getApplicationContext());
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			NotesManager.closeDB();

@@ -14,8 +14,8 @@
             android:id="@+id/listItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:text="TextView"
             android:textColor="@android:color/black" />
     </LinearLayout>

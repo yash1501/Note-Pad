@@ -62,6 +62,25 @@ public class NoteDetailActivity extends Activity {
 	}
 
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		NotesManager noteManager = NotesManager
+				.getInstance(getApplicationContext());
+		noteManager.createNote();
+		EditText noteEditor = (EditText) findViewById(R.id.noteEditor);
+		SharedPreferences sharedPreferences = getSharedPreferences(
+				NotesManager.NOTE_ID, Context.MODE_PRIVATE
+						| Context.MODE_WORLD_WRITEABLE);
+		noteId = sharedPreferences.getString(NotesManager.NOTE_ID, null);
+
+		currentNote = noteManager.searchNote(noteId);
+		if (currentNote != null) {
+			noteEditor.setText(currentNote.getNoteData());
+		}
+
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (isTextChanged) {
@@ -102,6 +121,10 @@ public class NoteDetailActivity extends Activity {
 				NoteDetailActivity.this.setResult(0);
 				NoteDetailActivity.this.finish();
 			}
+		}
+		if (keyCode == KeyEvent.KEYCODE_HOME) {
+			NoteDetailActivity.this.setResult(0);
+			NoteDetailActivity.this.finish();
 		}
 		return super.onKeyDown(keyCode, event);
 	}

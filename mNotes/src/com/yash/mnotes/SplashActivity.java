@@ -3,6 +3,7 @@ package com.yash.mnotes;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 
 public class SplashActivity extends Activity {
 
@@ -11,6 +12,7 @@ public class SplashActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 

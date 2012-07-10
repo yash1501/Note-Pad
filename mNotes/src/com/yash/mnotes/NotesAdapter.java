@@ -21,6 +21,8 @@ public class NotesAdapter extends ArrayAdapter {
 	int resourceId;
 	List<Note> notes;
 
+	private static int MAX_TITLE_LENGTH = 40;
+
 	public NotesAdapter(Context context, int resourceId, List<Note> notes) {
 		super(context, resourceId);
 		this.resourceId = resourceId;
@@ -32,6 +34,7 @@ public class NotesAdapter extends ArrayAdapter {
 	public boolean areAllItemsEnabled() {
 		return false;
 	}
+
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View row = convertView;
@@ -40,7 +43,12 @@ public class NotesAdapter extends ArrayAdapter {
 		row.setTag(notes.get(position));
 		TextView textView = (TextView) row.findViewById(R.id.listItem);
 		Note note = notes.get(position);
-		textView.setText(note.getNoteTitle());
+		if (note.getNoteData().length() <= MAX_TITLE_LENGTH) {
+			textView.setText(note.getNoteData());
+		} else {
+			textView.setText(note.getNoteData().substring(0, MAX_TITLE_LENGTH));
+		}
+
 		CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
 		checkBox.setFocusable(false);
 		checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
